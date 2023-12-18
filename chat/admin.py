@@ -1,10 +1,10 @@
 from django.contrib import admin
-from chat.models import Message
+from chat.models import Chat, Message
 
 # Register your models here.
 
 class MessageAdmin(admin.ModelAdmin):
-    fields = ('text','created_at','author','receiver',)
+    fields = ('chat','text','created_at','author','receiver',)
     list_display = ('text','created_at','author','receiver',)
     search_fields = ('text',)
     
@@ -12,3 +12,4 @@ class MessageAdmin(admin.ModelAdmin):
     
 
 admin.site.register(Message,MessageAdmin)
+admin.site.register(Chat)

@@ -6,11 +6,16 @@
     .page-content {
         padding: 100px 100px;
     }
+
+    i {
+      margin-top: 10px;
+    }
 </style>
 
 <!-- Always shows a header, even in smaller screens. -->
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
+    
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title">Welcome {{ request.user }}</span>
@@ -40,9 +45,10 @@
 
       <!-- Textfield with Floating Label -->
 
-      <form action="#">
+      <form action="/chat/" method="post">
+        {% csrf_token %}
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="sample3" />
+          <input class="mdl-textfield__input" name="textmessage" type="text" id="sample3" />
           <label class="mdl-textfield__label" for="sample3">Text...</label>
         </div>
 
