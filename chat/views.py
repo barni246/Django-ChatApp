@@ -3,7 +3,7 @@ from .models import Message, Chat
 
 def index(request):
    myChat = Chat.objects.get(id=1)
-   if request.method == 'POST':
+   if request.method == 'POST' and request.POST.get('textmessage', '') != '':
         print("Recived data: " + request.POST['textmessage'])
         myChat = Chat.objects.get(id=1)
         Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
