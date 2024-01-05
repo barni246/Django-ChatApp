@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Message, Chat
+from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 def index(request):
    myChat = Chat.objects.get(id=1)
@@ -18,4 +21,21 @@ def index(request):
 
 
 def login_view(request):
+    if request.method == 'POST':
+        user = authenticate(username = request.POST.get('username') , password = request.POST.get('password') )
+        if user:
+            login(request,user)
+            return HttpResponseRedirect('/chat/')
+        else:
+            return render(request, 'auth/login.html', {'wrongPassword' : True})
     return render(request, 'auth/login.html')
+
+
+def register_view(request):
+    if request.method == 'POST':
+        user = User.objects.create_user(username = request.POST.get('username'), email = request.POST.get('email') , password = request.POST.get('password'))
+        if user:
+            return HttpResponseRedirect('/login/')
+        else:
+            return render(request, 'auth/register.html', {'invalidRegister': True})
+    return render(request, 'auth/register.html')
