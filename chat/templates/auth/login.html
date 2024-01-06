@@ -8,6 +8,7 @@
 
 <form method="POST" action="/login/">
   {% csrf_token %}
+  <div><input type="hidden" name="redirect" value="{{ redirect }}"></div>
   <div>
     <input name="username" placeholder="name" type="text" />
   </div>
