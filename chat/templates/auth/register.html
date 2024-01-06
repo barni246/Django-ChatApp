@@ -1,29 +1,31 @@
-<h1>Register</h1>
+{% extends 'base.html' %}
+{% block content %}
 
-{% if invalidRegister %}
+  <h1>Register</h1>
 
-   <p>Die Registration ist fehlgeschlagen!</p>
+  {% if invalidRegister %}
+    <p>Die Registration ist fehlgeschlagen!</p>
+  {% endif %}
 
-{% endif %}
-
-
-<form method="POST" action="/register/">
+  <form method="POST" action="/register/">
     {% csrf_token %}
     <div>
       <input name="username" placeholder="name" type="text" />
     </div>
     <div>
-        <input name="email" placeholder="email" type="email" />
-      </div>
+      <input name="email" placeholder="email" type="email" />
+    </div>
     <div>
       <input name="password" placeholder="password" type="password" />
     </div>
     <div>
-        <input name="confirmPassword" placeholder="confirm password" type="password" />
-      </div>
+      <input name="confirmPassword" placeholder="confirm password" type="password" />
+    </div>
     <div>
       <button>Registrieren</button>
     </div>
   </form>
 
-<a href="/login/">Login</a>
+  <a href="/login/">Login</a>
+  
+{% endblock %}

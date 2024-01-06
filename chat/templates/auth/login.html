@@ -1,23 +1,34 @@
-<h1>Login</h1>
+{% extends 'base.html' %}
+{% block content %}
 
-{% if wrongPassword %}
+  <h1>Login</h1>
 
-<p>Benutzername oder Passwort ist falsch</p>
+  {% if wrongPassword %}
+    <p>Benutzername oder Passwort ist falsch</p>
+  {% endif %}
 
-{% endif %}
+  <form method="POST" action="/login/">
+    {% csrf_token %}
 
-<form method="POST" action="/login/">
-  {% csrf_token %}
-  <div><input type="hidden" name="redirect" value="{{ redirect }}"></div>
-  <div>
-    <input name="username" placeholder="name" type="text" />
-  </div>
-  <div>
-    <input name="password" placeholder="password" type="password" />
-  </div>
-  <div>
-    <button>Login</button>
-  </div>
-</form>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-<a href="/register/">Register</a>
+    <div>
+      <input type="hidden" name="redirect" value="{{ redirect }}" />
+    </div>
+    <div>
+      <input name="username" placeholder="name" type="text" />
+    </div>
+    <div>
+      <input name="password" placeholder="password" type="password" />
+    </div>
+    <div>
+      <button>Login</button>
+    </div>
+
+    </div>
+
+  </form>
+
+  <a href="/register/">Register</a>
+
+{% endblock %}
