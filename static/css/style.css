@@ -1,0 +1,23 @@
+.page-content {
+    padding: 100px 100px;
+    font-size: 18px;
+  }
+  
+  i {
+    margin-top: 10px;
+  }
+  
+  .color-gray {
+    color: rgba(0, 0, 0, 0.4);
+    margin-right: 8px;
+  }
+
+  a {
+    text-decoration: none;
+    color: rgb(63,81,181);
+    font-size: 16px;
+  }
+
+  a:hover {
+    color: rgb(255,64,129);
+  }

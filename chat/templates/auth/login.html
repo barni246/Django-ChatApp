@@ -2,33 +2,57 @@
 {% block content %}
 
   <h1>Login</h1>
+ 
 
   {% if wrongPassword %}
     <p>Benutzername oder Passwort ist falsch</p>
   {% endif %}
 
+  <div>
+
   <form method="POST" action="/login/">
     {% csrf_token %}
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      {% comment %} <div>
+        <input type="hidden" name="redirect" value="{{ redirect }}" />
+      </div>
+      <div>
+        <input name="username" placeholder="name" type="text" />
+      </div>
+      <div>
+        <input name="password" placeholder="password" type="password" />
+      </div>
+      <div>
+        <button>Login</button>
+      </div>
+    </div> {% endcomment %}
 
-    <div>
-      <input type="hidden" name="redirect" value="{{ redirect }}" />
-    </div>
-    <div>
-      <input name="username" placeholder="name" type="text" />
-    </div>
-    <div>
-      <input name="password" placeholder="password" type="password" />
-    </div>
-    <div>
-      <button>Login</button>
+    <div><input type="hidden" name="redirect" value="{{ redirect }}" /></div>  
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="username" type="text" id="sample3" />
+        <label class="mdl-textfield__label" for="sample3">Username...</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="password" type="text" id="sample33" />
+        <label class="mdl-textfield__label" for="sample33">Password...</label>
+      </div>
+
+      <!-- Accent-colored raised button with ripple -->
+    <div style="margin-top: 36px;">
+       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Login</button>
     </div>
 
-    </div>
-
+  
   </form>
 
-  <a href="/register/">Register</a>
-
+</div>
+ <a href="/register/"  title="Click here to register">New User?</a>
 {% endblock %}
+
+{% comment %} <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label d-none">
+  <input class="mdl-textfield__input" name="password" type="password" id="sample333" autocomplete="new-password" />
+  <label class="mdl-textfield__label" for="sample333"></label>
+</div> {% endcomment %}

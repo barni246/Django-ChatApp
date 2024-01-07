@@ -1,19 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<style>
-  .page-content {
-    padding: 100px 100px;
-  }
-  
-  i {
-    margin-top: 10px;
-  }
-  
-  .color-gray {
-    color: rgba(0, 0, 0, 0.4);
-  }
-</style>
 
 
 {% if request.user.is_authenticated %}
@@ -28,12 +15,14 @@
 
 <form action="/chat/" method="post">
   {% csrf_token %}
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <div style="margin-top: 16px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" name="textmessage" type="text" id="sample3" />
     <label class="mdl-textfield__label" for="sample3">Text...</label>
   </div>
 
-  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
+  <div>
+    <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
+  </div>
 </form>
 {% else %}
   <h1>Nicht eigeloggt</h1>
