@@ -15,9 +15,11 @@
   a {
     text-decoration: none;
     color: rgb(63,81,181);
-    font-size: 32px;
+    font-size: 18px !important;
   }
 
   a:hover {
     color: rgb(255,64,129);
   }
+
+  
