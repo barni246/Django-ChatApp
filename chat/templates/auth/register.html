@@ -1,66 +1,38 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-
   <h1>Register</h1>
 
-  {% if invalidRegister %}
-    <p>Die Registration ist fehlgeschlagen!</p>
+  {% if wrong_form %}
+    <p>Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Eingaben.</p>
   {% endif %}
 
   <form method="POST" action="/register/">
     {% csrf_token %}
-    {% comment %} <div>
-      <input name="username" placeholder="name" type="text" />
-    </div>
-    <div>
-      <input name="email" placeholder="email" type="email" />
-    </div>
-    <div>
-      <input name="password" placeholder="password" type="password" />
-    </div>
-    <div>
-      <input name="confirmPassword" placeholder="confirm password" type="password" />
-    </div>
-    <div>
-      <button>Registrieren</button>
-    </div> {% endcomment %}
-
 
     <div class="input-container" style="display: flex; flex-direction: column;">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="username" type="text" id="sample3" />
+        <label class="mdl-textfield__label" for="sample3">Username...</label>
+      </div>
 
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input"  name="username" type="text" id="sample3" >
-            <label class="mdl-textfield__label"  for="sample3">Username...</label>
-        </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="email" type="email" id="sample34" autocomplete="off" />
+        <label class="mdl-textfield__label" for="sample34">Email...</label>
+      </div>
 
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" name="email" type="email" id="sample34"  autocomplete="off">
-            <label class="mdl-textfield__label" for="sample34">Email...</label>
-        </div>
-    
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" name="password" type="password" id="sample33"  autocomplete="off">
-            <label class="mdl-textfield__label" for="sample33">Password...</label>
-        </div>
-    
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" name="confirmPassword" type="password" id="sample333"  autocomplete="new-password">
-            <label class="mdl-textfield__label" for="sample333">Confirm password...</label>
-        </div>
-    
-        <!-- Accent-colored raised button with ripple -->
-        </div> <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Sign up
-        </button>
-        <div>
-    
-    </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="password" type="password" id="sample33" autocomplete="off" />
+        <label class="mdl-textfield__label" for="sample33">Password...</label>
+      </div>
 
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" name="confirmPassword" type="password" id="sample333" autocomplete="new-password" />
+        <label class="mdl-textfield__label" for="sample333">Confirm password...</label>
+      </div>
 
-
-
+      <!-- Accent-colored raised button with ripple -->
+    </div> <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign up</button>
+    <div></div>
   </form>
-
- {% comment %} <a href="/login/">Login</a> {% endcomment %}
 
 {% endblock %}
