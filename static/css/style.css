@@ -15,11 +15,16 @@
   a {
     text-decoration: none;
     color: rgb(63,81,181);
-    font-size: 18px !important;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
   }
 
   a:hover {
     color: rgb(255,64,129);
+  }
+
+  h1 {
+    color: rgb(63,81,181);
   }
 
   
