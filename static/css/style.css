@@ -86,9 +86,11 @@ h1 {
 }
 
 .other-user {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.05); */
+  background-color: white;
+  background-color: rgb(232, 229, 229);
   margin: 8px;
   padding: 8px;
   display: flex;
@@ -98,12 +100,26 @@ h1 {
 }
 
 .user {
-  border: 1px solid rgb(255, 64, 129);
-  background-color: rgba(0, 0, 0, 0.1);
+  /* border: 1px solid rgb(255, 64, 129); */
+  padding-top: 16px;
+  padding-bottom: 16px;
   border-radius: 8px;
-  margin: 8px;
-  padding: 8px;
+  color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+}
+
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+.mdl-layout__content {
+ 
+  background-color: rgb(249, 248, 248);
+  background-color: rgba(0, 0, 0, 0.1);
+   background-image: url('/static/img/alu.jpg');
 }

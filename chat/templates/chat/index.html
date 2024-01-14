@@ -10,7 +10,11 @@
           {% if message.author == request.user %}
           <div style="width: fit-content; display: flex; justify-content: flex-start;">
              <div class="user">
-            <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 800;" class="color-blue">{{ message.text }}</i>
+              <span style=" background-color: rgb(63, 81, 181); padding: 16px 32px;border-radius: 8px; "> <b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 600; color: white;" >{{ message.text }}</i></span>
+              <div style="display: flex; justify-content: flex-start; width: 100%;">
+                <span style="font-size: 12px; background-color: lightblue; padding: 3px 5px; margin-top: 3px; border-radius: 5px;" class="color-black ">{{ message.created_at }}{{' '}}</span>
+              </div>
+              
  
           </div>
           </div>
@@ -42,13 +46,16 @@
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
       const formatOption = { month: 'short', day: 'numeric', year: 'numeric' };
+      const timeFormatOptions = { hour: 'numeric', minute: 'numeric' };
+      const formattedTime = currentDate.toLocaleTimeString('en-US', timeFormatOptions);
       const formattedDate = currentDate.toLocaleDateString('en-US', formatOption);
+      const fullFormattedDateTime = `${formattedDate} ${formattedTime}`;
       fd.append('textmessage', messageField.value);
       fd.append('csrfmiddlewaretoken', token);
       try {
           messageContainer.innerHTML += `
               <div class="color-black" id="deleteMessage">
-                  <span  style="font-size: 12px;"class="color-gray">[${formattedDate}]</span><b class="color-red"> {{ request.user }}:</b> <i style=" font-weight: 800;" class="color-gray">${messageField.value} </i>
+                  <span  style="font-size: 12px;"class="color-gray">[${fullFormattedDateTime}]</span><b class="color-red"> {{ request.user }}:</b> <i style=" font-weight: 800;" class="color-gray">${messageField.value} </i>
               </div>`;
           let response = await fetch('/chat/', {
               method: 'POST',
@@ -65,7 +72,7 @@
             document.getElementById('deleteMessage').remove();
             messageContainer.innerHTML += `
               <div  class="color-black">
-                <span style="font-size: 12px;" class="color-gray">[${formattedDate}]</span><b class="color-red"> {{ request.user }}: </b> <i style=" font-weight: 800;" class="color-blue">${copyTextMessage} </i>
+                <span style="font-size: 12px;" class="color-gray">[${ fullFormattedDateTime}]</span><b class="color-red"> {{ request.user }}: </b> <i style=" font-weight: 800;" class="color-blue">${copyTextMessage} </i>
               </div>`;            
           },1500);
       } catch (e) {
@@ -77,7 +84,7 @@
 {% comment %} <form action="/chat/" method="post"> {% endcomment %}
   <form onsubmit="sendMessage() ; return false;"   method="post"> 
   {% csrf_token %}
-  <div style="margin-top: 16px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+  <div style="margin-top: 16px; padding: 28px; width: 45%; margin-bottom: 16px; background-color: white; border-radius: 8px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
     <label class="mdl-textfield__label" for="messageField">Text...</label>
   </div>
