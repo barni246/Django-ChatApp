@@ -24,7 +24,6 @@
       const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
       const monthIndex = currentDate.getMonth();
       const day = currentDate.getDate();
-      const month = currentDate.getMonth() + 1; // Beachten Sie, dass die Monate bei 0 beginnen, daher +1
       const year = currentDate.getFullYear();
      //const hours = currentDate.getHours();
      //const minutes = currentDate.getMinutes();
@@ -40,19 +39,21 @@
               <div id="deleteMessage">
                   <span class="color-gray">[${formattedDate}]</span> {{ request.user }}: <i class="color-gray">${messageField.value} </i>
               </div>`;
-           await fetch('/chat/', {
+          let response = await fetch('/chat/', {
               method: 'POST',
               body: fd
           });
-
-            document.getElementById('deleteMessage').remove();
-            messageContainer.innerHTML += `
-                <div">
-                    <span class="color-gray">[${formattedDate}]</span> {{ request.user }}: <i>${messageField.value} </i>
-                </div>`;
-  
-            console.log('Success!!');
-         
+          let jsonObj = await response.json();
+          let json = JSON.parse(jsonObj);
+          console.log('JSON FORMAT: ',json);
+          console.log('text: ',json.fields['text']);
+          console.log('created_at: ',json.fields['created_at']);
+          document.getElementById('deleteMessage').remove();
+          messageContainer.innerHTML += `
+            <div">
+              <span class="color-gray">[${formattedDate}]</span> {{ request.user }}: <i>${messageField.value} </i>
+            </div>`;
+          console.log('Success!!');
           messageField.value = '';
 
       } catch (e) {
