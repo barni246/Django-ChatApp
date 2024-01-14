@@ -9,7 +9,7 @@
   
    {% for message in messages %}
      <div>
-       <span class="color-gray">[{{ message.created_at }}]</span><b>{{ message.author }}:</b> <i>{{ message.text }}</i>
+       <span class="color-gray">[{{ message.created_at }}]{{' '}}</span><b>{{ message.author }}:</b> <i class="color-blue">{{ message.text }}</i>
      </div>
    {% endfor %}
 
@@ -21,46 +21,36 @@
       let fd = new FormData();
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
-      const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
-      const monthIndex = currentDate.getMonth();
-      const day = currentDate.getDate();
-      const year = currentDate.getFullYear();
-     //const hours = currentDate.getHours();
-     //const minutes = currentDate.getMinutes();
-     //const seconds = currentDate.getSeconds();
-
-     //const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
-      const formattedDate = `${monthNames[monthIndex]} ${day}, ${year}`;
-
+      const formatOption = { month: 'short', day: 'numeric', year: 'numeric' };
+      const formattedDate = currentDate.toLocaleDateString('en-US', formatOption);
       fd.append('textmessage', messageField.value);
       fd.append('csrfmiddlewaretoken', token);
       try {
           messageContainer.innerHTML += `
-              <div id="deleteMessage">
-                  <span class="color-gray">[${formattedDate}]</span> {{ request.user }}: <i class="color-gray">${messageField.value} </i>
+              <div class="color-black" id="deleteMessage">
+                  <span class="color-gray">[${formattedDate}]</span><b> {{ request.user }}:</b> <i class="color-gray">${messageField.value} </i>
               </div>`;
           let response = await fetch('/chat/', {
               method: 'POST',
               body: fd
           });
-          let jsonObj = await response.json();
-          let json = JSON.parse(jsonObj);
-          console.log('JSON FORMAT: ',json);
-          console.log('text: ',json.fields['text']);
-          console.log('created_at: ',json.fields['created_at']);
-          document.getElementById('deleteMessage').remove();
-          messageContainer.innerHTML += `
-            <div">
-              <span class="color-gray">[${formattedDate}]</span> {{ request.user }}: <i>${messageField.value} </i>
-            </div>`;
-          console.log('Success!!');
+          let json = await response.json();
+         // let json = JSON.parse(jsonObj);
+         // console.log('JSON FORMAT: ',json);
+         // console.log('text: ',json.fields['text']);
+         // console.log('created_at: ',json.fields['created_at']);
+          let copyTextMessage =  messageField.value;
           messageField.value = '';
-
+          setTimeout(function() {    //it simulates the loading time of the server
+            document.getElementById('deleteMessage').remove();
+            messageContainer.innerHTML += `
+              <div  class="color-black">
+                <span class="color-gray">[${formattedDate}]</span><b> {{ request.user }}: </b> <i class="color-blue">${copyTextMessage} </i>
+              </div>`;            
+          },1500);
       } catch (e) {
           console.error('An error occured', e);
       }
-
-
   }
 </script>
 
