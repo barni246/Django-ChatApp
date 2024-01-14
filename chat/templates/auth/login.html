@@ -6,6 +6,10 @@
     <p class="warning-message">Username or password is incorrect!!!</p>
   {% endif %}
 
+  {% if alreadyLoggedIn %}
+    <p class="info-message" >{{ info }}</p>
+  {% endif %}
+
 
   <script>
     function login() {
@@ -17,8 +21,34 @@
   <div>
     <form method="POST" onsubmit="login()">
       {% csrf_token %}
+      {% if alreadyLoggedIn %}
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <div>
+        <input type="hidden" name="redirect" value="{{ redirect }}" />
+      </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input required class="mdl-textfield__input" name="username" type="text" id="sample3" disabled />
+        <label class="mdl-textfield__label" for="sample3">Username...</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input required class="mdl-textfield__input" name="password" type="text" id="sample33" disabled />
+        <label class="mdl-textfield__label" for="sample33">Password...</label>
+      </div>
+
+      <div class="button-container" >
+        <div style="margin-top: 36px;">
+           <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>Login</button>
+        </div>
+        <div class="d-none" id="loadingWrapper">
+          <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+        </div>
+    </div>
+
+      {% else %}
+
+       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <div>
         <input type="hidden" name="redirect" value="{{ redirect }}" />
       </div>
@@ -41,17 +71,21 @@
             <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
           </div>
       </div>
-    </form>
+    </form> 
 
   </div>
 
-  <div id="xml" class="icon material-icons">
-    <a href="/register/">New user?</a>
-  </div>
-  <div style="font-size: 16px; background-color:rgb(63,81,181)" class="mdl-tooltip" for="xml">
+  
+     <div id="xml" class="icon material-icons">
+         <a href="/register/">New user?</a>
+    </div>
+    <div style="font-size: 16px; background-color:rgb(63,81,181)" class="mdl-tooltip" for="xml">
     If you're new user, <br/><br/>
     click here to register
-  </div>
+    </div>
+  
+    {% endif %}
+  
 
   
 {% endblock %}

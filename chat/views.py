@@ -22,15 +22,43 @@ def index(request):
 
 def login_view(request):
     redirect = request.GET.get('next')
+    info = 'You are already logged in!'
+
+    if request.user.is_authenticated:
+        return render(request, 'auth/login.html', {'alreadyLoggedIn': True, 'info': info})
+
     if request.method == 'POST':
-        user = authenticate(username = request.POST.get('username') , password = request.POST.get('password') )
-        if user:
-            login(request,user)
-           # return HttpResponseRedirect('/chat/')
-            return HttpResponseRedirect(request.POST.get('redirect'))
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(redirect or '/chat/')
         else:
-            return render(request, 'auth/login.html', {'wrongPassword' : True, 'redirect': redirect})
+            return render(request, 'auth/login.html', {'wrongPassword': True, 'redirect': redirect})
+
     return render(request, 'auth/login.html', {'redirect': redirect})
+
+
+
+
+# def login_view(request):
+#     redirect = request.GET.get('next')
+    
+#     if request.user.is_authenticated:
+#         return render(request, 'auth/login.html', {'alreadyLoggedIn': True})
+
+    
+#     if request.method == 'POST':
+#         user = authenticate(username = request.POST.get('username') , password = request.POST.get('password') )
+#         if user:
+#             login(request,user)
+#            # return HttpResponseRedirect('/chat/')
+#             return HttpResponseRedirect(request.POST.get('redirect'))
+#         else:
+#             return render(request, 'auth/login.html', {'wrongPassword' : True, 'redirect': redirect})
+#     return render(request, 'auth/login.html', {'redirect': redirect})
 
 
 # def register_view(request):
@@ -54,7 +82,7 @@ def register_view(request):
         new_password = request.POST.get('password')
         confirm_password = request.POST.get('confirmPassword')
         if new_password == confirm_password:
-            user = User.objects.create_user(username=new_username, email=new_email, password=new_password)
+            user = User.objects.create_user(username=new_username, email=new_email, password=new_password,is_staff=True)
             if user:
                 return HttpResponseRedirect('/login/',{'wrong_form':False})
         return render(request, 'auth/register.html', {'wrong_form':True})
