@@ -12,6 +12,11 @@ i {
   margin-right: 8px;
 }
 
+.color-red {
+  color: rgb(255, 64, 129);
+  margin-right: 8px;
+}
+
 .color-gray {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -61,4 +66,23 @@ h1 {
   color: rgb(63, 81, 181);
   font-weight: 600;
   font-size: 20px;
+}
+
+.ml-100 {
+  margin-left: 100px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.op-5 {
+  opacity: 0.5;
+}
+
+.other-user {
+  padding: 8px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

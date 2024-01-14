@@ -6,14 +6,21 @@
 {% if request.user.is_authenticated %}
 
 <div id="messageContainer">
-  
-   {% for message in messages %}
-     <div>
-       <span class="color-gray">[{{ message.created_at }}]{{' '}}</span><b>{{ message.author }}:</b> <i class="color-blue">{{ message.text }}</i>
-     </div>
-   {% endfor %}
+  {% for message in messages %}
+      <div>
+          {% if message.author == request.user %}
+              <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style="text-decoration: underline;" class="color-blue">{{ message.text }}</i>
+          {% else %}
 
+          <div class="other-user">
+            <span style="font-size: 12px;"  class="color-gray">[{{ message.created_at }}]{{' '}}</span><b >{{ message.author }}:</b> <i class="color-blue mb-8">{{ message.text }}</i>
+          </div>
+           
+          {% endif %}
+      </div>
+  {% endfor %}
 </div>
+
 <!-- Textfield with Floating Label -->
 
 <script>
