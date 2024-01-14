@@ -8,12 +8,23 @@
   {% for message in messages %}
       <div>
           {% if message.author == request.user %}
-              <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 800;" class="color-blue">{{ message.text }}</i>
+          <div style="width: fit-content; display: flex; justify-content: flex-start;">
+             <div class="user">
+            <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 800;" class="color-blue">{{ message.text }}</i>
+ 
+          </div>
+          </div>
+         
           {% else %}
-
-          <div class="other-user">
+          <div style="width: 100%; display: flex; justify-content: flex-end;">
+            <div class="other-user">
             <span style="font-size: 12px;"  class="color-gray">[{{ message.created_at }}]{{' '}}</span><b class="color-green" >{{ message.author }}:</b> <i class="color-blue mb-8">{{ message.text }}</i>
           </div>
+          </div>
+
+            
+
+          
            
           {% endif %}
       </div>
