@@ -31,6 +31,11 @@
           <nav class="mdl-navigation mdl-layout--large-screen-only">
             <a class="mdl-navigation__link" href="/chat/">Chat</a>
             <a class="mdl-navigation__link" href="/admin/">Admin</a>
+            {% if request.user.is_authenticated %}
+           {% comment %} <a  class="mdl-navigation__link" href="{% url 'admin:logout' %}">Logout</a> {% endcomment %}
+           <a  class="mdl-navigation__link" href="{% url 'admin:logout' %}?next={% url 'index' %}">Logout</a>
+            {% endif %}
+           
           </nav>
         </div>
       </header>
@@ -39,6 +44,10 @@
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="/chat/">Chat</a>
           <a class="mdl-navigation__link" href="/admin/">Admin</a>
+          {% if request.user.is_authenticated %}
+          {% comment %} <a class="mdl-navigation__link" href="{% url 'admin:logout' %}">Logout</a> {% endcomment %}
+          <a  class="mdl-navigation__link" href="{% url 'admin:logout' %}?next={% url 'login' %}">Logout</a>
+          {% endif %}
         </nav>
       </div>
       <main class="mdl-layout__content">

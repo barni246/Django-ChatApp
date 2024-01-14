@@ -2,24 +2,26 @@
 {% block content %}
 
 
-
 {% if request.user.is_authenticated %}
 
 <div id="messageContainer">
   {% for message in messages %}
       <div>
           {% if message.author == request.user %}
-              <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style="text-decoration: underline;" class="color-blue">{{ message.text }}</i>
+              <span style="font-size: 12px;" class="color-gray ">[{{ message.created_at }}]{{' '}}</span><b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 800;" class="color-blue">{{ message.text }}</i>
           {% else %}
 
           <div class="other-user">
-            <span style="font-size: 12px;"  class="color-gray">[{{ message.created_at }}]{{' '}}</span><b >{{ message.author }}:</b> <i class="color-blue mb-8">{{ message.text }}</i>
+            <span style="font-size: 12px;"  class="color-gray">[{{ message.created_at }}]{{' '}}</span><b class="color-green" >{{ message.author }}:</b> <i class="color-blue mb-8">{{ message.text }}</i>
           </div>
            
           {% endif %}
       </div>
   {% endfor %}
 </div>
+
+
+
 
 <!-- Textfield with Floating Label -->
 
@@ -35,7 +37,7 @@
       try {
           messageContainer.innerHTML += `
               <div class="color-black" id="deleteMessage">
-                  <span class="color-gray">[${formattedDate}]</span><b> {{ request.user }}:</b> <i class="color-gray">${messageField.value} </i>
+                  <span  style="font-size: 12px;"class="color-gray">[${formattedDate}]</span><b class="color-red"> {{ request.user }}:</b> <i style=" font-weight: 800;" class="color-gray">${messageField.value} </i>
               </div>`;
           let response = await fetch('/chat/', {
               method: 'POST',
@@ -52,7 +54,7 @@
             document.getElementById('deleteMessage').remove();
             messageContainer.innerHTML += `
               <div  class="color-black">
-                <span class="color-gray">[${formattedDate}]</span><b> {{ request.user }}: </b> <i class="color-blue">${copyTextMessage} </i>
+                <span style="font-size: 12px;" class="color-gray">[${formattedDate}]</span><b class="color-red"> {{ request.user }}: </b> <i style=" font-weight: 800;" class="color-blue">${copyTextMessage} </i>
               </div>`;            
           },1500);
       } catch (e) {
