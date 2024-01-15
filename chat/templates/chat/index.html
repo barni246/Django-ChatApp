@@ -4,34 +4,23 @@
 
 {% if request.user.is_authenticated %}
 
-<div id="messageContainer">
+<div class="message-container" id="messageContainer">
   {% for message in messages %}
-      <div>
           {% if message.author == request.user %}
-          <div style="width: fit-content; display: flex; justify-content: flex-start;">
-             <div class="user">
-              <span style=" background-color: rgb(63, 81, 181); padding: 16px 32px;border-radius: 8px; "> <b class="color-red">{{ message.author }}:</b> <i style=" font-weight: 600; color: white;" >{{ message.text }}</i></span>
-              <div style="display: flex; justify-content: flex-start; width: 100%;">
-                <span style="font-size: 12px; background-color: lightblue; padding: 3px 5px; margin-top: 3px; border-radius: 5px;" class="color-black ">{{ message.created_at }}{{' '}}</span>
-              </div>
-              
- 
-          </div>
-          </div>
-         
+          <div class="wrapper-maim-user">
+            <div class="main-user">
+                <span> <b class="color-red">{{ message.author }}:</b><i>{{ message.text }}</i></span>
+                <span class="main-user-time">{{ message.created_at }}</span>
+            </div>
+          </div>       
           {% else %}
-          <div style="width: 100%; display: flex; justify-content: flex-end;">
-            <div class="other-user">
-            <span style="font-size: 12px;"  class="color-gray">[{{ message.created_at }}]{{' '}}</span><b class="color-green" >{{ message.author }}:</b> <i class="color-blue mb-8">{{ message.text }}</i>
-          </div>
-          </div>
-
-            
-
-          
-           
+          <div class="wrapper-other-user">
+             <div class="other-user c-gray">
+               <span> <b>{{ message.author }}:</b><i>{{ message.text }}</i></span>
+               <span class="other-user-time">{{ message.created_at }}</span>
+             </div>  
+         </div> 
           {% endif %}
-      </div>
   {% endfor %}
 </div>
 
@@ -41,6 +30,7 @@
 <!-- Textfield with Floating Label -->
 
 <script>
+
   async function sendMessage() {
       let fd = new FormData();
       let token = '{{ csrf_token }}';
@@ -81,18 +71,26 @@
   }
 </script>
 
+
+<div style="position: fixed; bottom: 0; left: 30%; width: 100%;">
+
 {% comment %} <form action="/chat/" method="post"> {% endcomment %}
   <form onsubmit="sendMessage() ; return false;"   method="post"> 
-  {% csrf_token %}
-  <div style="margin-top: 16px; padding: 28px; width: 45%; margin-bottom: 16px; background-color: white; border-radius: 8px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
-    <label class="mdl-textfield__label" for="messageField">Text...</label>
-  </div>
+    {% csrf_token %}
+    <div style="margin-top: 16px; padding: 28px; width: 45%; margin-bottom: 16px; background-color: white; border-radius: 8px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
+      <label class="mdl-textfield__label" for="messageField">Text...</label>
+    </div>
+  
+    <div>
+      <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
+    </div>
+  </form>
 
-  <div>
-    <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
-  </div>
-</form>
+
+
+</div>
+
 {% else %}
 
   <h1>Nicht eigeloggt</h1>
@@ -105,5 +103,3 @@
 
 {% endblock %}
 
-{% comment %} <h1>Chatroom {{ username }}</h1> {% endcomment %}
-{% comment %} <h1>Herzlich willkommen {{ request.user }}!</h1> {% endcomment %}
