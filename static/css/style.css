@@ -3,8 +3,8 @@
   font-size: 18px;
 } */
 
-i {
-  margin-top: 10px;
+i{
+  margin-top: 23px;
 }
 
 .color-black {
@@ -89,7 +89,6 @@ h1 {
 .message-container {
 
 max-width: 100%;
-padding: 100px;
 display: flex;
 flex-direction: column;
 
@@ -115,11 +114,16 @@ margin-bottom: 70px;
   max-width: 50%;
   position: relative;
   background-color: chartreuse;
+  background-color: rgb(63, 81, 181);
   padding: 24px 32px;
   border-radius: 12px;
   font-size: 20px;
   display: flex;
   word-wrap: break-word;
+}
+
+.text-main {
+  color: white;
 }
 
 .c-gray {
@@ -148,9 +152,43 @@ margin-bottom: 70px;
   font-size: 15px;
 }
 
+.form-container {
+  width: 100%;
+  background-color: white;
+  padding: 8px; 
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+}
+
+.form-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.mdl-textfield__input {
+font-size: 22px;
+}
+
+.send-btn {
+  margin-left: 16px;
+}
+
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+
+.mdl-layout__header-row {
+  height: 80px;
+  font-size: 23px;
 }
 
 
@@ -159,4 +197,9 @@ margin-bottom: 70px;
   background-color: rgb(249, 248, 248);
   background-color: rgba(0, 0, 0, 0.1);
    background-image: url('/static/img/alu.jpg');
+   padding: 80px;
+}
+
+#xml {
+  margin-top: 16px;
 }

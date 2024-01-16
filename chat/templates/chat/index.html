@@ -5,22 +5,22 @@
 {% if request.user.is_authenticated %}
 
 <div class="message-container" id="messageContainer">
-  {% for message in messages %}
+{% for message in messages %}
           {% if message.author == request.user %}
           <div class="wrapper-maim-user">
             <div class="main-user">
-                <span> <b class="color-red">{{ message.author }}:</b><i>{{ message.text }}</i></span>
+                <span> <b class="color-red">{{ message.author }}:</b><i class="text-main">{{ message.text }}</i></span>
                 <span class="main-user-time">{{ message.created_at }}</span>
             </div>
           </div>       
-          {% else %}
+{% else %}
           <div class="wrapper-other-user">
              <div class="other-user c-gray">
                <span> <b>{{ message.author }}:</b><i>{{ message.text }}</i></span>
                <span class="other-user-time">{{ message.created_at }}</span>
              </div>  
          </div> 
-          {% endif %}
+{% endif %}
   {% endfor %}
 </div>
 
@@ -72,26 +72,27 @@
 </script>
 
 
-<div style="position: fixed; bottom: 0; left: 30%; width: 100%;">
+<div class="form-container">
+     <form onsubmit="sendMessage() ; return false;"   method="post"> 
 
-{% comment %} <form action="/chat/" method="post"> {% endcomment %}
-  <form onsubmit="sendMessage() ; return false;"   method="post"> 
-    {% csrf_token %}
-    <div style="margin-top: 16px; padding: 28px; width: 45%; margin-bottom: 16px; background-color: white; border-radius: 8px;" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
-      <label class="mdl-textfield__label" for="messageField">Text...</label>
-    </div>
+
+         <div class="form-content" >
+
+       {% csrf_token %}
+       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
+          <label class="mdl-textfield__label" for="messageField">Text...</label>
+       </div>
   
-    <div>
-      <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
-    </div>
-  </form>
+       <div class="send-btn">
+         <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Send</button>
+       </div>
 
-
-
+          </div>
+     </form>
 </div>
 
-{% else %}
+{% else %} 
 
   <h1>Nicht eigeloggt</h1>
   <p>Du bist aktuell nicht eingelogt, <br>
