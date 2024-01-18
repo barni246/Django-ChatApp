@@ -130,6 +130,10 @@ margin-bottom: 70px;
   background-color: rgb(238, 236, 236);
 }
 
+.c-white {
+  color: white;
+}
+
 .main-user-time{
   position: absolute;
   width: auto;
@@ -198,8 +202,11 @@ font-size: 22px;
   background-color: rgba(0, 0, 0, 0.1);
    background-image: url('/static/img/alu.jpg');
    padding: 80px;
+   padding-bottom: 250PX;
 }
 
 #xml {
   margin-top: 16px;
 }
+
+

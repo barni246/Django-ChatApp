@@ -24,14 +24,17 @@
   {% endfor %}
 </div>
 
-
-
-
-<!-- Textfield with Floating Label -->
-
 <script>
 
+  function scrollToBottom() {
+  main.scrollTop = main.scrollHeight;
+
+ 
+}
+
+
   async function sendMessage() {
+      scrollToBottom();
       let fd = new FormData();
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
@@ -44,9 +47,13 @@
       fd.append('csrfmiddlewaretoken', token);
       try {
           messageContainer.innerHTML += `
-              <div class="color-black" id="deleteMessage">
-                  <span  style="font-size: 12px;"class="color-gray">[${fullFormattedDateTime}]</span><b class="color-red"> {{ request.user }}:</b> <i style=" font-weight: 800;" class="color-gray">${messageField.value} </i>
-              </div>`;
+          <div class="wrapper-maim-user" id="deleteMessage">
+              <div  class="main-user">
+                <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white" >${messageField.value} </i></span>
+                <span class="main-user-time">${formattedDate}</span>
+              </div>
+          </div>`;
+        
           let response = await fetch('/chat/', {
               method: 'POST',
               body: fd
@@ -58,17 +65,25 @@
          // console.log('created_at: ',json.fields['created_at']);
           let copyTextMessage =  messageField.value;
           messageField.value = '';
-          setTimeout(function() {    //it simulates the loading time of the server
             document.getElementById('deleteMessage').remove();
             messageContainer.innerHTML += `
-              <div  class="color-black">
-                <span style="font-size: 12px;" class="color-gray">[${ fullFormattedDateTime}]</span><b class="color-red"> {{ request.user }}: </b> <i style=" font-weight: 800;" class="color-blue">${copyTextMessage} </i>
-              </div>`;            
-          },1500);
+            <div class="wrapper-maim-user">
+            <div  class="main-user" >
+              <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white">${copyTextMessage} </i></span>
+              <span class="main-user-time " >${formattedDate}</span>
+            </div>
+            </div>`;  
       } catch (e) {
           console.error('An error occured', e);
       }
   }
+
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log('event')
+    scrollToBottom();
+});
 </script>
 
 

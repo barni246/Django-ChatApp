@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+from django.shortcuts import get_object_or_404
 
 
 @login_required(login_url = '/login/')
@@ -15,6 +16,13 @@ def index(request):
         myChat = Chat.objects.get(id=1)
         new_message =  Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
         serialized_obj = serializers.serialize('json', [new_message,])
+        
+        nachrichten = Message.objects.all()
+        for nachricht in nachrichten:
+         print(f"Nachricht ID: {nachricht.id}, Text: {nachricht.text}")
+        # nachricht = get_object_or_404(Message, pk=227)
+        # nachricht.delete()
+        
         return JsonResponse(serialized_obj[1:-1], safe=False)
    chatMessages = Message.objects.filter(chat__id=1)
    return render(request, 'chat/index.html', {'messages': chatMessages})
@@ -87,6 +95,13 @@ def register_view(request):
                 return HttpResponseRedirect('/login/',{'wrong_form':False})
         return render(request, 'auth/register.html', {'wrong_form':True})
     return render(request, 'auth/register.html')
+
+
+
+def nachricht_löschen(request, nachricht_id):
+    nachricht = get_object_or_404(Message, pk=nachricht_id)
+    nachricht.delete()
+    return JsonResponse({'message': 'Nachricht erfolgreich gelöscht'})
 
 
 
