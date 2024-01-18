@@ -3,8 +3,12 @@
   font-size: 18px;
 } */
 
+html {
+  scroll-behavior: smooth;
+}
+
 i{
-  margin-top: 23px;
+  margin-top: 25px;
 }
 
 .color-black {

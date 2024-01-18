@@ -26,15 +26,32 @@
 
 <script>
 
-  function scrollToBottom() {
+  function scrollToBottomInput() {
   main.scrollTop = main.scrollHeight;
+} 
 
- 
+
+function scrollToBottom() {
+  var main = document.getElementById('main');
+  if (main) {
+      main.scrollTop = main.scrollHeight;
+  }
 }
+
+// Rufe die Funktion nach einer Verzögerung von 1 Sekunde auf
+setTimeout(function() {
+  scrollToBottom();
+}, 1000); // 1000 Millisekunden (1 Sekunde) Verzögerung
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Rufe die Funktion nach einer Verzögerung von 1 Sekunde auf
+      scrollToBottom();
+});
 
 
   async function sendMessage() {
-      scrollToBottom();
+      scrollToBottomInput();
       let fd = new FormData();
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
