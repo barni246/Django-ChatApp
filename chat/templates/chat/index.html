@@ -45,7 +45,6 @@ setTimeout(function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Rufe die Funktion nach einer Verzögerung von 1 Sekunde auf
       scrollToBottom();
 });
 
@@ -95,12 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log('event')
-    scrollToBottom();
-});
 </script>
 
 
@@ -111,8 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
          <div class="form-content" >
 
        {% csrf_token %}
-       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
+       <div class="mdl-textfield mdl-textfield-width mdl-js-textfield mdl-textfield--floating-label mdl-bg">
+          <input class="mdl-textfield__input mdl-textfield__input-style" name="textmessage" type="text" id="messageField" />
           <label class="mdl-textfield__label" for="messageField">Text...</label>
        </div>
   
