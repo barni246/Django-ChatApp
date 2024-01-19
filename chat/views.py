@@ -17,9 +17,9 @@ def index(request):
         new_message =  Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
         serialized_obj = serializers.serialize('json', [new_message,])
         
-        nachrichten = Message.objects.all()
-        for nachricht in nachrichten:
-         print(f"Nachricht ID: {nachricht.id}, Text: {nachricht.text}")
+       # nachrichten = Message.objects.all()
+       # for nachricht in nachrichten:
+       #  print(f"Nachricht ID: {nachricht.id}, Text: {nachricht.text}")
         # nachricht = get_object_or_404(Message, pk=227)
         # nachricht.delete()
         
@@ -95,14 +95,6 @@ def register_view(request):
                 return HttpResponseRedirect('/login/',{'wrong_form':False})
         return render(request, 'auth/register.html', {'wrong_form':True})
     return render(request, 'auth/register.html')
-
-
-
-def nachricht_löschen(request, nachricht_id):
-    nachricht = get_object_or_404(Message, pk=nachricht_id)
-    nachricht.delete()
-    return JsonResponse({'message': 'Nachricht erfolgreich gelöscht'})
-
 
 
 

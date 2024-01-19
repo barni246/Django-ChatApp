@@ -142,23 +142,23 @@ margin-bottom: 70px;
 .main-user-time{
   position: absolute;
   width: auto;
-  bottom: -38px;
+  bottom: -25px;
   left: 0;  
-  padding: 5px 10px;
+  padding: 0px 4px;
   background-color: white;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 11px;
 }
 
 .other-user-time {
   position: absolute;
   width: auto;
-  bottom: -38px;
+  bottom: -25px;
   right: 0;  
-  padding: 5px 10px;
+  padding: 0px 4px;
   background-color: white;
   border-radius: 8px;
-  font-size: 15px;
+  font-size: 11px;
 }
 
 .form-container {
@@ -227,3 +227,15 @@ margin-bottom: 70px;
   border-radius: 5px;
    background-color: white;
  }
+
+ .year {
+  color: blue;  /* Farbe für das Jahr */
+}
+
+.month {
+  color: green;  /* Farbe für den Monat */
+}
+
+.day {
+  color: red;  /* Farbe für den Tag */
+}

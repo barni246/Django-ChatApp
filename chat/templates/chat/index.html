@@ -10,14 +10,24 @@
           <div class="wrapper-maim-user">
             <div class="main-user">
                 <span> <b class="color-red">{{ message.author }}:</b><i class="text-main">{{ message.text }}</i></span>
-                <span class="main-user-time">{{ message.created_at }}</span>
+                <span class="main-user-time">
+                  <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
+                  <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
+                  <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
+                  <span> {{ message.created_at|date:"H:i" }}</span> 
+                </span>
             </div>
           </div>       
 {% else %}
           <div class="wrapper-other-user">
              <div class="other-user c-gray">
                <span> <b>{{ message.author }}:</b><i>{{ message.text }}</i></span>
-               <span class="other-user-time">{{ message.created_at }}</span>
+                <span class="other-user-time">
+                <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
+                <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
+                <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
+                <span> {{ message.created_at|date:"H:i" }}</span> 
+              </span>
              </div>  
          </div> 
 {% endif %}
@@ -96,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="wrapper-maim-user" id="deleteMessage">
               <div  class="main-user">
                 <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white" >${messageField.value} </i></span>
-                <span class="main-user-time">${formattedDate}</span>
+                <span class="main-user-time">${fullFormattedDateTime}</span>
               </div>
           </div>`;
         
@@ -116,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="wrapper-maim-user">
             <div  class="main-user" >
               <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white">${copyTextMessage} </i></span>
-              <span class="main-user-time " >${formattedDate}</span>
+              <span class="main-user-time " >${fullFormattedDateTime}</span>
             </div>
             </div>`;  
       } catch (e) {
