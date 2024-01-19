@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
    
   });
-  
+
 
   function breakText() {
     let messageField = document.getElementById('messageField');
@@ -77,6 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
   async function sendMessage() {
+    
+      if (messageField.value.trim() !== '') {
       scrollToBottomInput();
       breakText();
       let fd = new FormData();
@@ -120,6 +122,8 @@ document.addEventListener("DOMContentLoaded", function() {
       } catch (e) {
           console.error('An error occured', e);
       }
+
+    }
   }
 
 </script>
