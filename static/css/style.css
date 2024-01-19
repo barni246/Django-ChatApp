@@ -1,14 +1,10 @@
-/* .page-content {
-  padding: 100px 100px;
-  font-size: 18px;
-} */
 
 html {
   scroll-behavior: smooth;
 }
 
 i{
-  margin-top: 25px;
+  margin-top: 21px;
 }
 
 .color-black {
@@ -123,7 +119,12 @@ margin-bottom: 70px;
   border-radius: 12px;
   font-size: 20px;
   display: flex;
-  word-wrap: break-word;
+}
+
+.break-long-words {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+
 }
 
 .text-main {
@@ -180,16 +181,6 @@ margin-bottom: 70px;
   justify-content: center;
   
 }
-
-/* .mdl-textfield__input {
-font-size: 22px;
-border-bottom: none;
-padding-left: 16px;
-} */
-
-/* .mdl-textfield {
-  width: 380px;
-  } */
 
   .mdl-textfield__input-style {
     font-size: 22px;

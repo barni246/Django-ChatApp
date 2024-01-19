@@ -38,19 +38,47 @@ function scrollToBottom() {
   }
 }
 
-// Rufe die Funktion nach einer Verzögerung von 1 Sekunde auf
-setTimeout(function() {
+document.addEventListener("DOMContentLoaded", function() {
+  setTimeout(function() {
   scrollToBottom();
-}, 1000); // 1000 Millisekunden (1 Sekunde) Verzögerung
+}, 1000);
 
+   
+  });
+  
 
-document.addEventListener('DOMContentLoaded', function() {
-      scrollToBottom();
-});
+  function breakText() {
+    let messageField = document.getElementById('messageField');
+    let inputValue = messageField.value;
+
+    let words = inputValue.split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+      if (words[i].length > 25) {
+        let chunkSize = 25;
+        let word = words[i];
+        let brokenWord = '';
+
+        for (let j = 0; j < word.length; j += chunkSize) {
+          brokenWord += word.substring(j, j + chunkSize) + '-';
+        }
+
+        brokenWord = brokenWord.slice(0, -1);
+
+        words[i] = brokenWord;
+      }
+    }
+
+    let newValue = words.join(' ');
+    messageField.value = newValue;
+  }
+  
+  
 
 
   async function sendMessage() {
       scrollToBottomInput();
+      breakText();
       let fd = new FormData();
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
