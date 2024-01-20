@@ -22,7 +22,7 @@
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">
             {% if request.user.is_authenticated %}
-              Welcome {{ request.user }}
+           Welcome  <span class="color-red">{{ request.user }}</span>  
             {% else %}
               Welcom! Please log in!
             {% endif %}
