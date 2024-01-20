@@ -88,6 +88,9 @@ h1 {
 .mb-8 {
   margin-bottom: 8px;
 }
+.mr-8 {
+  margin-right: 8px;
+}
 
 .op-5 {
   opacity: 0.5;
