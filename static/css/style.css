@@ -36,8 +36,7 @@ i{
 }
 
 .color-blue {
-  color: rgb(63, 81, 181);
-  margin-right: 8px;
+  color: rgb(112, 132, 244);
 }
 
 a {
@@ -157,6 +156,7 @@ margin-bottom: 70px;
   background-color: white;
   border-radius: 8px;
   font-size: 11px;
+  border: 1px solid transparent;
 }
 
 .other-user-time {
@@ -168,6 +168,7 @@ margin-bottom: 70px;
   background-color: white;
   border-radius: 8px;
   font-size: 11px;
+  border: 1px solid transparent;
 }
 
 .form-container {
@@ -236,4 +237,7 @@ margin-bottom: 70px;
    background-color: white;
  }
 
+ .date-border {
+  border: 1px solid rgb(77, 96, 201);
+ }
 

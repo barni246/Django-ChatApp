@@ -8,25 +8,25 @@
 {% for message in messages %}
           {% if message.author == request.user %}
           <div class="wrapper-maim-user">
-            <div class="main-user">
+            <div class="main-user date-border">
                 <span> <b class="color-red">{{ message.author }}:</b><i class="text-main">{{ message.text }}</i></span>
                 <span class="main-user-time">
                   <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                   <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
                   <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
-                  <span> {{ message.created_at|date:"H:i" }}</span> 
+                  <span class="color-blue"><b>{{ message.created_at|date:"H:i" }}</b></span> 
                 </span>
             </div>
           </div>       
 {% else %}
           <div class="wrapper-other-user">
-             <div class="other-user c-gray bg-green">
+             <div class="other-user c-gray bg-green date-border">
                <span> <b class="text-main">{{ message.author }}:</b><i class="color-d-gray">{{ message.text }}</i></span>
                 <span class="other-user-time">
                 <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                 <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
                 <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
-                <span> {{ message.created_at|date:"H:i" }}</span> 
+                <span class="color-blue"><b>{{ message.created_at|date:"H:i" }}</b></span> 
               </span>
              </div>  
          </div> 
@@ -95,10 +95,13 @@ document.addEventListener("DOMContentLoaded", function() {
       let token = '{{ csrf_token }}';
       const currentDate = new Date();
       const formatOption = { month: 'short', day: 'numeric', year: 'numeric' };
-      const timeFormatOptions = { hour: 'numeric', minute: 'numeric' };
-      const formattedTime = currentDate.toLocaleTimeString('en-US', timeFormatOptions);
+      const timeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
       const formattedDate = currentDate.toLocaleDateString('en-US', formatOption);
-      const fullFormattedDateTime = `${formattedDate} ${formattedTime}`;
+      const formattedTime = currentDate.toLocaleTimeString('en-US', timeFormatOptions);
+      const [time, period] = formattedTime.split(' ');
+      let [hours, minutes] = time.split(':');
+      hours = period === 'PM' ? (parseInt(hours, 10) + 12).toString() : hours;
+      const newFormattedTime = `${hours}:${minutes}`;
       fd.append('textmessage', messageField.value);
       fd.append('csrfmiddlewaretoken', token);
       try {
@@ -106,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="wrapper-maim-user" id="deleteMessage">
               <div  class="main-user">
                 <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white" >${messageField.value} </i></span>
-                <span class="main-user-time">${fullFormattedDateTime}</span>
+                <span class="main-user-time color-gray">${formattedDate}<span><b> ${newFormattedTime}</b></span></span>
               </div>
           </div>`;
         
@@ -121,14 +124,17 @@ document.addEventListener("DOMContentLoaded", function() {
          // console.log('created_at: ',json.fields['created_at']);
           let copyTextMessage =  messageField.value;
           messageField.value = '';
-            document.getElementById('deleteMessage').remove();
+          setTimeout(() => {
+             document.getElementById('deleteMessage').remove();
             messageContainer.innerHTML += `
             <div class="wrapper-maim-user">
             <div  class="main-user" >
               <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white">${copyTextMessage} </i></span>
-              <span class="main-user-time " >${fullFormattedDateTime}</span>
+              <span class="main-user-time color-gray" >${formattedDate}<span class="color-blue"><b> ${newFormattedTime} </b></span></span>
             </div>
             </div>`;  
+          }, 3000);
+           
       } catch (e) {
           console.error('An error occured', e);
       }
