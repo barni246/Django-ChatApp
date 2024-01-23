@@ -28,7 +28,7 @@
                 <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
                 <span class="color-blue"><b>{{ message.created_at|date:"H:i" }} √√</b></span> 
               </span>
-             </div>  
+             </div>            
          </div> 
 {% endif %}
   {% endfor %}
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <div class="wrapper-maim-user" id="deleteMessage">
               <div  class="main-user">
                 <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white" >${messageField.value} </i></span>
-                <span class="main-user-time color-gray">${formattedDate}<span><b> ${newFormattedTime} √√</b  class="color-gray"> </span></span>
+                <span class="main-user-time color-gray">${formattedDate}<span><b class="fw-900"> ${newFormattedTime} √√</b  class="color-gray"> </span></span>
               </div>
           </div>`;
         
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div class="wrapper-maim-user">
             <div  class="main-user" >
               <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white">${copyTextMessage} </i></span>
-             <span class="main-user-time color-gray" >${formattedDate}<span class="color-blue"><b> ${newFormattedTime} √√</b></span></span>
+             <span class="main-user-time color-gray" >${formattedDate}<span class="color-blue"><b class="fw-900"> ${newFormattedTime} √√</b></span></span>
             </div>
             </div>`;  
           }, 2000);
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
        {% csrf_token %}
        <div class="mdl-textfield mdl-textfield-width mdl-js-textfield mdl-textfield--floating-label mdl-bg">
-          <input class="mdl-textfield__input mdl-textfield__input-style" name="textmessage" type="text" id="messageField" />
+          <input class="mdl-textfield__input p-0 mdl-textfield__input-style" name="textmessage" type="text" id="messageField" />
           <label class="mdl-textfield__label" for="messageField">Text...</label>
        </div>
   
