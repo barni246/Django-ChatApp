@@ -9,24 +9,24 @@
           {% if message.author == request.user %}
           <div class="wrapper-maim-user">
             <div class="main-user date-border">
-                <span> <b class="color-red">{{ message.author }}:</b><i class="text-main ">{{ message.text }}</i></span>
+                <span> <b class="color-red">{{ message.author }}:</b><br><i class="text-main ">{{ message.text }}</i></span>
                 <span class="main-user-time">
                   <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                   <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
                   <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
-                  <span class="color-blue"><b>{{ message.created_at|date:"H:i" }} √√</b></span> 
+                  <span class="color-blue"><b class="fw-900">{{ message.created_at|date:"H:i" }} √√</b></span> 
                 </span>
             </div>
           </div>       
 {% else %}
           <div class="wrapper-other-user">
              <div class="other-user c-gray bg-other-user date-border">
-               <span> <b class="text-main mr-8">{{ message.author }}:</b><i class="color-d-gray">{{ message.text }}</i></span>
+               <span> <b class="text-main mr-8">{{ message.author }}:</b><br><i class="color-d-gray">{{ message.text }}</i></span>
                 <span class="other-user-time">
                 <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                 <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
                 <span class="color-gray">{{ message.created_at|date:"Y" }}</span>
-                <span class="color-blue"><b>{{ message.created_at|date:"H:i" }} √√</b></span> 
+                <span class="color-blue"><b class="fw-900">{{ message.created_at|date:"H:i" }} √√</b></span> 
               </span>
              </div>            
          </div> 
@@ -37,68 +37,54 @@
 <script>
 
   function scrollToBottomInput() {
-  main.scrollTop = main.scrollHeight;
+     main.scrollTop = main.scrollHeight;
 } 
-
-"""Eine Beschreibung der Klasse MyModel."""
-
 
 
 
 function scrollToBottom() {
-  var main = document.getElementById('main');
+  let main = document.getElementById('main');
   if (main) {
       main.scrollTop = main.scrollHeight;
   }
 }
 
+
 document.addEventListener("DOMContentLoaded", function() {
   setTimeout(function() {
   scrollToBottom();
-}, 1000);
+ }, 1000);
+ });
 
-   
-  });
-
-
-  function breakText() {
+/*
+    It breaks long words in the message field into chunks of 25 characters.
+*/
+function breakText() {
     let messageField = document.getElementById('messageField');
     let inputValue = messageField.value;
-
     let words = inputValue.split(' ');
-
-    for (let i = 0; i < words.length; i++) {
-      if (words[i].length > 25) {
-        let chunkSize = 25;
-        let word = words[i];
-        let brokenWord = '';
-
-        for (let j = 0; j < word.length; j += chunkSize) {
-          brokenWord += word.substring(j, j + chunkSize) + '-';
+    words.forEach((word, index) => {
+        if (word.length > 25) {
+            let chunkSize = 25;
+            let brokenWord = '';
+            for (let i = 0; i < word.length; i += chunkSize) {
+                brokenWord += word.substring(i, i + chunkSize) + '-';
+            }
+            words[index] = brokenWord.slice(0, -1);
         }
+    });
+    messageField.value = words.join(' ');
+}
 
-        brokenWord = brokenWord.slice(0, -1);
-
-        words[i] = brokenWord;
-      }
-    }
-
-    let newValue = words.join(' ');
-    messageField.value = newValue;
-  }
-  
-  
-
-
-  async function sendMessage() {
-    
+/*
+    It creates date and time format
+*/
+async function sendMessage() {
       if (messageField.value.trim() !== '') {
       scrollToBottomInput();
       breakText();
-      let fd = new FormData();
-      let token = '{{ csrf_token }}';
       const currentDate = new Date();
-      const formatOption = { month: 'short', day: 'numeric', year: 'numeric' };
+      const formatOption = { month: 'long', day: 'numeric', year: 'numeric' };
       const timeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
       const formattedDate = currentDate.toLocaleDateString('en-US', formatOption);
       const formattedTime = currentDate.toLocaleTimeString('en-US', timeFormatOptions);
@@ -106,55 +92,62 @@ document.addEventListener("DOMContentLoaded", function() {
       let [hours, minutes] = time.split(':');
       hours = period === 'PM' ? (parseInt(hours, 10) + 12).toString() : hours;
       const newFormattedTime = `${hours}:${minutes}`;
-      fd.append('textmessage', messageField.value);
-      fd.append('csrfmiddlewaretoken', token);
-      try {
-          messageContainer.innerHTML += `
-          <div class="wrapper-maim-user" id="deleteMessage">
-              <div  class="main-user">
-                <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white" >${messageField.value} </i></span>
-                <span class="main-user-time color-gray">${formattedDate}<span><b class="fw-900"> ${newFormattedTime} √√</b  class="color-gray"> </span></span>
-              </div>
-          </div>`;
-        
-          let response = await fetch('/chat/', {
-              method: 'POST',
-              body: fd
-          });
-          let json = await response.json();
-         // let json = JSON.parse(jsonObj);
-         // console.log('JSON FORMAT: ',json);
-         // console.log('text: ',json.fields['text']);
-         // console.log('created_at: ',json.fields['created_at']);
-          let copyTextMessage =  messageField.value;
-          messageField.value = '';
-          setTimeout(() => {
-             document.getElementById('deleteMessage').remove();
-            messageContainer.innerHTML += `
+      createFormData(formattedDate,newFormattedTime);
+     }
+}
+
+
+/*
+   Sends a message to the Django server.
+*/
+async function createFormData(formattedDate,newFormattedTime) {
+    let fd = new FormData();
+    let token = '{{ csrf_token }}';
+    fd.append('textmessage', messageField.value);
+    fd.append('csrfmiddlewaretoken', token);
+    try {
+        renderDeleteMessageContainer(formattedDate,newFormattedTime)
+        let response = await fetch('/chat/', { method: 'POST', body: fd });
+        //let json = await response.json();
+        let copyTextMessage =  messageField.value;
+        messageField.value = '';
+        setTimeout(() => {
+           document.getElementById('deleteMessage').remove();
+           renderMessageContainer(formattedDate,copyTextMessage,newFormattedTime)
+           }, 2000);        
+    } catch (e) {
+        console.error('An error occured', e);
+    }
+  }
+  
+
+  function renderDeleteMessageContainer(formattedDate,newFormattedTime) {
+    messageContainer.innerHTML += `
+    <div class="wrapper-maim-user" id="deleteMessage">
+        <div  class="main-user">
+          <span><b class="color-red"> {{ request.user }}:</b><br> <i class="c-white" >${messageField.value} </i></span>
+          <span class="main-user-time color-gray">${formattedDate}<span><b class="fw-900"> ${newFormattedTime} √√</b></span></span>
+        </div>
+    </div>`;
+  }
+
+
+  function renderMessageContainer(formattedDate,copyTextMessage,newFormattedTime) {
+    messageContainer.innerHTML += `
             <div class="wrapper-maim-user">
             <div  class="main-user" >
-              <span><b class="color-red"> {{ request.user }}:</b> <i class="c-white">${copyTextMessage} </i></span>
+              <span><b class="color-red"> {{ request.user }}:</b><br> <i class="c-white">${copyTextMessage} </i></span>
              <span class="main-user-time color-gray" >${formattedDate}<span class="color-blue"><b class="fw-900"> ${newFormattedTime} √√</b></span></span>
             </div>
             </div>`;  
-          }, 2000);
-           
-      } catch (e) {
-          console.error('An error occured', e);
-      }
-
-    }
-  }
-
+   }    
+  
 </script>
 
 
 <div class="form-container">
      <form onsubmit="sendMessage() ; return false;"   method="post"> 
-
-
-         <div class="form-content" >
-
+       <div class="form-content" >
        {% csrf_token %}
        <div class="mdl-textfield mdl-textfield-width mdl-js-textfield mdl-textfield--floating-label mdl-bg">
           <input class="mdl-textfield__input p-0 mdl-textfield__input-style" name="textmessage" type="text" id="messageField" />

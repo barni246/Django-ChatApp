@@ -159,13 +159,14 @@ h1 {
 .main-user-time,
 .other-user-time {
   position: absolute;
-  min-width: 135px;
+  min-width: 138px;
   bottom: -25px;
   right: 0;
   padding: 0px 4px;
   background-color: white;
   border-radius: 8px;
   font-size: 11px;
+  text-align: center;
 }
 
 
@@ -284,8 +285,8 @@ h1 {
   }
 
   .main-user, .other-user {
-    font-size: 15px;
-    padding: 16px;
+    font-size: 14px;
+    padding: 12px;
   }
 
  
