@@ -5,7 +5,7 @@ ChatApp is a Django application for real-time messaging and chat functionality.
 ## Installation
 
 1. Clone the repository:
-git clone https://github.com/yourusername/ChatApp.git
+git clone https://github.com/barni246/Django-ChatApp.git
 
 
 2. Navigate to the project directory:
