@@ -3,6 +3,7 @@ from chat.models import Chat, Message
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class MessageTestCase(TestCase):
     def setUp(self):
         self.chat = Chat.objects.create() 
