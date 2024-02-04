@@ -52,10 +52,7 @@ Contributions are welcome! Please follow these steps to contribute to the ChatAp
 4. Push your changes to your fork.
 5. Submit a pull request to the main repository.
 
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-For questions, feedback, or support, please contact the project maintainers at chatapp@example.com.
+For questions, feedback, or support, please contact the project maintainers at barnabas.gonda@googlemail.com
