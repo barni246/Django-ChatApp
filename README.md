@@ -33,14 +33,12 @@ python manage.py runserver
 
 - Users can register or login to the ChatApp to access messaging features.
 - Real-time messaging is supported with WebSocket integration.
-- Users can create chat rooms, send messages, and view message history.
 
 ## Examples
 
 1. Register a new user account.
 2. Login with the newly created account.
-3. Create a new chat room or join an existing one.
-4. Send messages in real-time to other users in the chat room.
+3. Send messages in real-time to other users in the chat room.
 
 ## Contributing
 
