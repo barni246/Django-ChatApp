@@ -57,15 +57,15 @@ document.addEventListener("DOMContentLoaded", function() {
  });
 
 /*
-    It breaks long words in the message field into chunks of 25 characters.
+    It breaks long words in the message field into chunks of 20 characters.
 */
 function breakText() {
     let messageField = document.getElementById('messageField');
     let inputValue = messageField.value;
     let words = inputValue.split(' ');
     words.forEach((word, index) => {
-        if (word.length > 25) {
-            let chunkSize = 25;
+        if (word.length > 20) {
+            let chunkSize = 20;
             let brokenWord = '';
             for (let i = 0; i < word.length; i += chunkSize) {
                 brokenWord += word.substring(i, i + chunkSize) + '-';
