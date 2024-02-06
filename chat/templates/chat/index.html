@@ -9,7 +9,7 @@
           {% if message.author == request.user %}
           <div class="wrapper-maim-user">
             <div class="main-user date-border">
-                <span> <b class="color-red">{{ message.author }}:</b><br><i class="text-main ">{{ message.text }}</i></span>
+                <span> <b class="color-red">{{ message.author }}:</b><br><br><i class="text-main ">{{ message.text }}</i></span>
                 <span class="main-user-time">
                   <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                   <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
@@ -21,7 +21,7 @@
 {% else %}
           <div class="wrapper-other-user">
              <div class="other-user c-gray bg-other-user date-border">
-               <span> <b class="text-main mr-8">{{ message.author }}:</b><br><i class="color-d-gray">{{ message.text }}</i></span>
+               <span> <b class="text-main mr-8">{{ message.author }}:</b><br><br><i class="color-d-gray">{{ message.text }}</i></span>
                 <span class="other-user-time">
                 <span class="color-gray">{{ message.created_at|date:"F" }}</span> 
                 <span class="color-gray">{{ message.created_at|date:"j" }},</span> 
@@ -125,7 +125,7 @@ async function createFormData(formattedDate,newFormattedTime) {
     messageContainer.innerHTML += `
     <div class="wrapper-maim-user" id="deleteMessage">
         <div  class="main-user">
-          <span><b class="color-red"> {{ request.user }}:</b><br> <i class="c-white" >${messageField.value} </i></span>
+          <span><b class="color-red"> {{ request.user }}:</b><br><br> <i class="c-white" >${messageField.value} </i></span>
           <span class="main-user-time color-gray">${formattedDate}<span><b class="fw-900"> ${newFormattedTime} √√</b></span></span>
         </div>
     </div>`;
@@ -136,7 +136,7 @@ async function createFormData(formattedDate,newFormattedTime) {
     messageContainer.innerHTML += `
             <div class="wrapper-maim-user">
             <div  class="main-user" >
-              <span><b class="color-red"> {{ request.user }}:</b><br> <i class="c-white">${copyTextMessage} </i></span>
+              <span><b class="color-red"> {{ request.user }}:</b><br><br> <i class="c-white">${copyTextMessage} </i></span>
              <span class="main-user-time color-gray" >${formattedDate}<span class="color-blue"><b class="fw-900"> ${newFormattedTime} √√</b></span></span>
             </div>
             </div>`;  

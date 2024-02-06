@@ -38,7 +38,7 @@ a {
   text-decoration: none;
   color: rgb(63, 81, 181);
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+  font-size: 18px !important ;
 }
 
 a:hover {
@@ -127,6 +127,7 @@ h1 {
 
 .text-main {
   color: white;
+  margin-top: 5px;
 }
 
 .c-gray {
@@ -185,7 +186,7 @@ h1 {
 }
 
 .mdl-textfield-width {
-  width: 380px;
+  width: 450px;
   padding-right: 28px;
 }
 
@@ -207,7 +208,7 @@ h1 {
 
   background-image: url('/static/img/alu.jpg');
   padding: 80px;
-  padding-bottom: 250PX;
+  padding-bottom: 250px;
 }
 
 #xml {
@@ -251,6 +252,11 @@ height: 2px;
     margin-left: 14px;
 }
 
+.mdl-textfield-width {
+  width: 350px;
+  padding-right: 28px;
+}
+
 }
 
 
@@ -258,7 +264,7 @@ height: 2px;
 
   .mdl-layout__content {
     padding: 25px;
-    padding-bottom: 200px;
+    /* padding-bottom: 200px; */
   }
 
  
