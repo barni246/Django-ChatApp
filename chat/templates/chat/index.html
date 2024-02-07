@@ -44,9 +44,7 @@
 
 function scrollToBottom() {
   let main = document.getElementById('main');
-  if (main) {
       main.scrollTop = main.scrollHeight;
-  }
 }
 
 
@@ -81,7 +79,8 @@ function breakText() {
 */
 async function sendMessage() {
       if (messageField.value.trim() !== '') {
-      scrollToBottomInput();
+     // scrollToBottomInput();
+      main.scrollTop = main.scrollHeight;
       breakText();
       const currentDate = new Date();
       const formatOption = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -149,7 +148,7 @@ async function createFormData(formattedDate,newFormattedTime) {
      <form onsubmit="sendMessage() ; return false;"   method="post"> 
        <div class="form-content" >
        {% csrf_token %}
-       <div class="mdl-textfield mdl-textfield-width mdl-js-textfield mdl-textfield--floating-label mdl-bg">
+       <div class="mdl-textfield ptb-10 pl-8 mdl-textfield-width mdl-js-textfield mdl-textfield--floating-label mdl-bg">
           <input class="mdl-textfield__input p-0 mdl-textfield__input-style" name="textmessage" type="text" id="messageField" />
           <label class="mdl-textfield__label" for="messageField">Text...</label>
        </div>
