@@ -146,7 +146,7 @@ h1 {
 .main-user-time,
 .other-user-time {
   position: absolute;
-  min-width: 138px;
+  min-width: 145px;
   bottom: -25px;
   right: 0;
   padding: 0px 4px;
