@@ -8,32 +8,41 @@
 
 
   <script>
+    // This function to handle form submission for registration
+    // Check if password and confirm password match
     function register() {
-       document.getElementById('loadingWrapperRegister').style="display:flex";
-    }
+      document.getElementById('loadingWrapperRegister').style="display:flex";
+       let password = document.getElementById("sample33").value;
+       let confirmPassword = document.getElementById("sample333").value;
+         if (password !== confirmPassword) {
+         return false; 
+       }
+         return true;
+   }
+
  </script>
 
-  <form method="POST" onsubmit="register()" >
+  <form method="POST" onsubmit="register()" id="registerForm">
     {% csrf_token %}
 
     <div class="input-container" style="display: flex; flex-direction: column;">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="username" type="text" id="sample3" autocomplete="off" />
+        <input required class="mdl-textfield__input" name="username" type="text" id="sample3" autocomplete="off" value="{{ request.POST.username }}" />
         <label class="mdl-textfield__label" for="sample3">Username...</label>
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="email" type="email" id="sample34" autocomplete="off" />
+        <input required class="mdl-textfield__input" name="email" type="email" id="sample34" autocomplete="off"  value="{{ request.POST.email }}"/>
         <label class="mdl-textfield__label" for="sample34">Email...</label>
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="password" type="password" id="sample33" autocomplete="off" />
+        <input required class="mdl-textfield__input" name="password" type="password" id="sample33" autocomplete="off" value="{{ request.POST.username }}" />
         <label class="mdl-textfield__label" for="sample33">Password...</label>
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="confirmPassword" type="password" id="sample333" autocomplete="new-password" />
+        <input required class="mdl-textfield__input" name="confirmPassword" type="password" id="sample333" autocomplete="new-password" value="{{ request.POST.confirmPassword }}" />
         <label class="mdl-textfield__label" for="sample333">Confirm password...</label>
       </div>
 
