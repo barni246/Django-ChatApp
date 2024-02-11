@@ -19,7 +19,7 @@
 
 
   <div>
-    <form method="POST" onsubmit="login()">
+    <form method="POST" onsubmit="login()" autocomplete="off">
       {% csrf_token %}
       {% if alreadyLoggedIn %}
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -28,12 +28,12 @@
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="username" type="text" id="sample3" disabled />
+        <input required class="mdl-textfield__input" name="username" type="text" id="sample3" disabled autocomplete="off" />
         <label class="mdl-textfield__label" for="sample3">Username...</label>
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="password" type="text" id="sample33" disabled />
+        <input required class="mdl-textfield__input" name="password" type="text" id="sample33" disabled autocomplete="off" />
         <label class="mdl-textfield__label" for="sample33">Password...</label>
       </div>
 
@@ -59,7 +59,7 @@
       </div>
 
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input required class="mdl-textfield__input" name="password" type="text" id="sample33" />
+        <input required class="mdl-textfield__input" name="password" type="password" id="sample33" />
         <label class="mdl-textfield__label" for="sample33">Password...</label>
       </div>
 
