@@ -41,16 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chat',
-    'django_nose',
 ]
 
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=foo,bar',
-]
-
-
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

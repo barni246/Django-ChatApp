@@ -1,10 +1,10 @@
-.. Simple Chat App documentation master file, created by
-   sphinx-quickstart on Sun Jan 28 17:18:45 2024.
+.. Chat App documentation master file, created by
+   sphinx-quickstart on Sat Feb 17 20:06:29 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Simple Chat App's documentation!
-===========================================
+Welcome to Chat App's documentation!
+====================================
 
 .. toctree::
    :maxdepth: 2

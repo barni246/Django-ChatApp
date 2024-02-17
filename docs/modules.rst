@@ -7,3 +7,4 @@ Django-ChatApp
    chat
    django_chat_app
    manage
+   tests
