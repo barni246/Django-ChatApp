@@ -9,7 +9,7 @@ git clone https://github.com/barni246/Django-ChatApp.git
 
 
 2. Navigate to the project directory:
-cd ChatApp
+cd Django-ChatApp
 
 3. Install dependencies:
 pip install -r requirements.txt
