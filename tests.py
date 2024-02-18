@@ -23,6 +23,5 @@ class MessageTestCase(TestCase):
         self.assertEqual(message.author, self.user)
         self.assertEqual(message.receiver, self.user)
         self.assertIsNotNone(message.created_at) 
-
-
+        
 # python manage.py test --verbosity=2 oder 3

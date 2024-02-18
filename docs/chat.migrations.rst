@@ -36,6 +36,14 @@ chat.migrations.0004\_alter\_message\_created\_at module
    :undoc-members:
    :show-inheritance:
 
+chat.migrations.0005\_alter\_chat\_created\_at module
+-----------------------------------------------------
+
+.. automodule:: chat.migrations.0005_alter_chat_created_at
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
